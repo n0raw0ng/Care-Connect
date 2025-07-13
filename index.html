@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Care Connect Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Care Connect User Interface</h1>
+
+  <div class="button-container">
+    <button onclick="showVisual()">See the Impact</button>
+    <button onclick="playAudio()">Hear the Change</button>
+  </div>
+
+  <!-- Visual: AI Food Scanner Carousel -->
+  <div id="visualContent">
+    <h2>AI Food Scanner</h2>
+    <div class="carousel">
+      <button class="nav left" onclick="changeSlide(-1)">&#10094;</button>
+      <img id="carouselImage" src="image 1.jpg" alt="Food Scan" />
+      <button class="nav right" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+    <p id="caption">Healthy Donation - Fresh and safe meal detected: Ready for donation</p>
+  </div>
+
+  <!-- Audio Section -->
+  <div id="audioContent">
+    <h2>Educational Audio Message</h2>
+    <audio id="careAudio" controls>
+     <source src="audio 1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+    <p><em>The presence of homeless people in the Kuala Lumpur city area seems to be on the rise. This highlights the growing scale of homelessness in urban centers exactly the challenge Care Connect aims to address through location-based food and health service delivery.</em></p>
+  </div>
+
+  <script>
+    // Show/Hide content
+    function showVisual() {
+      document.getElementById('visualContent').style.display = 'block';
+      document.getElementById('audioContent').style.display = 'none';
+    }
+    // Carousel functionality
+    const images = [
+      {
+        src:"image 1.jpg",
+        caption: "Healthy Donation - Fresh and safe meal detected: Ready for donation"
+      },
+      {
+        src: "image 2.jpg",
+        caption: "Questionable Food - Item appears partially spoiled: Recommend rechecking before delivery"
+      },
+      {
+        src: "image 3.jpg",
+        caption: "Unsafe Donation - Contaminated food identified: Not suitable for distribution"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function changeSlide(step) {
+      currentIndex += step;
+      if (currentIndex >= images.length) currentIndex = 0;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+
+      document.getElementById('carouselImage').src = images[currentIndex].src;
+      document.getElementById('caption').innerText = images[currentIndex].caption;
+    }
+  </script>
+<script>
+  function showVisual() {
+    document.getElementById('visualContent').style.display = 'block';
+    document.getElementById('audioContent').style.display = 'none';
+
+    const audio = document.getElementById('careAudio');
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  function playAudio() {
+    document.getElementById('audioContent').style.display = 'block';
+    document.getElementById('visualContent').style.display = 'none';
+
+    const audio = document.getElementById('careAudio');
+    audio.play(); // This only runs when the button is clicked
+  }
+</script>
+</body>
+</html>
